@@ -11,8 +11,8 @@ describe('TimeOffService', () => {
 
   const mockRepo = {
     findOneBy: jest.fn(),
-    create: jest.fn().mockImplementation(dto => dto),
-    save: jest.fn().mockImplementation(dto => dto),
+    create: jest.fn().mockImplementation((dto: LocalBalance) => dto),
+    save: jest.fn().mockImplementation((dto: LocalBalance) => dto),
   };
 
   beforeEach(async () => {
