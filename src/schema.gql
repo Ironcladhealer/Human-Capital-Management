@@ -1,0 +1,18 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type LocalBalance {
+  id: String!
+  employeeId: String!
+  locationId: String!
+  balanceDays: Int!
+}
+
+type Query {
+  getBalance(employeeId: String!, locationId: String!): LocalBalance!
+}
+
+type Mutation {
+  requestTimeOff(employeeId: String!, locationId: String!, days: Int!): LocalBalance!
+}
