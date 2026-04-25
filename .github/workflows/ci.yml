@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
-# Setting the environment variable at the workflow level to opt into Node 24
+# We can keep this to ensure any other JS-based actions also move to 24
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -16,12 +16,13 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      # Bumping to v5 to natively support Node 24
+      uses: actions/checkout@v5
 
     - name: Setup Node.js environment
-      uses: actions/setup-node@v4
+      # Bumping to v5 to natively support Node 24
+      uses: actions/setup-node@v5
       with:
-        # Updating the runtime version to Node 24
         node-version: '24.x'
         cache: 'npm'
 
@@ -32,7 +33,7 @@ jobs:
       run: npm run lint
 
     - name: Run Unit & Integration Tests
-      run: npm run test:cov # Running with coverage for proof of rigor
+      run: npm run test:cov
 
     - name: Upload Test Coverage
       uses: actions/upload-artifact@v4
