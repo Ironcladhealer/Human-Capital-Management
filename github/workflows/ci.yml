@@ -1,0 +1,43 @@
+name: ExampleHR Time-Off Microservice CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Check Linting & Formatting
+      run: npm run lint
+
+    - name: Run SQLite Migrations (Test DB)
+      # Assuming you have a script to initialize the test SQLite schema
+      run: npm run typeorm migration:run -- -c test 
+
+    - name: Run Unit & Integration Tests
+      run: npm run test
+
+    - name: Run E2E Tests (with Mock Server)
+      run: npm run test:e2e
+
+    - name: Upload Test Coverage
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: coverage/

@@ -44,3 +44,5 @@ During the design phase, several alternative approaches were evaluated:
 The value of this implementation relies heavily on test rigor.
 * **Mock Infrastructure:** A dedicated `HcmMockService` simulates the external HCM system, including programmable failures to test defensive logic.
 * **Integration Testing:** Jest is utilized to ensure the GraphQL resolvers correctly orchestrate the local database updates and the mock HCM API calls, guarding against future regressions. CI/CD pipelines enforce these checks on every commit.
+
+![alt text](image.png)
